@@ -1,5 +1,6 @@
 # TICTACTOE
 ![Icon](assets/window.png)
+---
 A bare bone implementation of the TicTacToe (X & O's)
 ### What It Does
 ---
@@ -11,6 +12,6 @@ The process of determining the optimal move to make against the user was impleme
 
 ### Installation
 ---
-You can download the executable file [here](https://lifeofdmt.github.io)
+You can download the executable file [here](https://github.com/lifeofdmt/TicTacToe/releases/tag/v1.0.0)
 > [!NOTE]
 > The program is only available on windows
