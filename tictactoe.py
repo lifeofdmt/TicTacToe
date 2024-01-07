@@ -22,14 +22,12 @@ def player(board):
     """
     Returns player who has the next turn on a board.
     """
-    plays = [0,0]
+    plays = [0,0] # Each element correspond to the number of X and Y plays respectively
 
-    for play in range(len(board)):
-        for i in board[play]:
-            if i == X:
-                plays[0] += 1
-            elif i == O:
-                plays[1] += 1
+    for row in range(len(board)):
+        plays[0] += board[row].count(X) # Count up total number of X's
+        plays[1] += board[row].count(O) # Count up total number of 0's
+    
     if plays[0] == plays[1]:
         return X
     return O
@@ -46,7 +44,6 @@ def actions(board):
             if board[height][width] == EMPTY:
                 point = (height,width)
                 actions.append(point)
-
     return actions
 
 
@@ -57,9 +54,7 @@ def result(board, action):
     value = copy.deepcopy(board)
     if not action in actions(value):
         raise Exception("Invalid Action")
-
     value[action[0]][action[1]] = player(value)
-
     return value
 
 
@@ -152,23 +147,18 @@ def minimax(board):
         return None
 
     actionss = actions(board)
-    values = []
     index = 0
 
     if player(board) == X:
-        for action in range(len(actionss)):
-            values.append(MIN_VALUE(result(board,actionss[action])))
+        values = [MIN_VALUE(result(board,actionss[action])) for action in range(len(actionss))]
 
         max_val = values[0]
         for i in range(len(values)):
             if values[i] > max_val:
                 max_val = values[i]
                 index = i
-
-        return actionss[index]
     else:
-        for action in range(len(actionss)):
-            values.append(MAX_VALUE(result(board,actionss[action])))
+        values = [MAX_VALUE(result(board,actionss[action])) for action in range(len(actionss))]
 
         min_val = values[0]
 
@@ -176,5 +166,4 @@ def minimax(board):
             if values[i] < min_val:
                 min_val = values[i]
                 index = i
-
-        return actionss[index]
+    return actionss[index]
